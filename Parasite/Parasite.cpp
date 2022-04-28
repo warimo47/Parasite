@@ -3,12 +3,15 @@
 #include "framework.h"
 #include "Parasite.h"
 
+#include "SceneManager.h"
+
 #define MAX_LOADSTRING 100
 
 // 전역 변수:
 HINSTANCE hInst; // 현재 인스턴스입니다.
 WCHAR szTitle[MAX_LOADSTRING]; // 제목 표시줄 텍스트입니다.
 WCHAR szWindowClass[MAX_LOADSTRING]; // 기본 창 클래스 이름입니다.
+SceneManager* gSceneManger = nullptr;
 
 // 이 코드 모듈에 포함된 함수의 선언을 전달합니다:
 ATOM MyRegisterClass(HINSTANCE hInstance);
@@ -36,6 +39,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
 
     HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_PARASITE));
 
+    gSceneManger = new SceneManager();
+
     MSG msg;
 
     // 기본 메시지 루프입니다:
@@ -47,6 +52,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
             DispatchMessage(&msg);
         }
     }
+
+    delete gSceneManger;
 
     return (int) msg.wParam;
 }
