@@ -5,9 +5,10 @@ SceneManager::SceneManager()
     winWidth = GetSystemMetrics(SM_CXSCREEN);
     winHeight = GetSystemMetrics(SM_CYSCREEN);
 
-	// map.Load(L"map.png");
+	background.Load(L"Resource/Background.png");
+	gameStartButton.Load(L"Resource/GameStartButton.png");
 
-	// ImageAlphaSetting(&map);
+	ImageAlphaSetting(&gameStartButton);
 }
 
 SceneManager::~SceneManager() {}
@@ -23,7 +24,20 @@ void SceneManager::Render(HWND hWnd)
     SelectObject(hViewdc, hViewBit);
     Rectangle(hViewdc, 0, 0, winWidth, winHeight);
 
+	int gsbAnim = 0;
 
+	RECT rect;
+	rect.left = 120;
+	rect.top = 640;
+	rect.right = rect.left + gameStartButton.GetWidth();
+	rect.bottom = rect.top + gameStartButton.GetHeight();
+	POINT point;
+	point.x = 120;
+	point.y = 640;
+
+	background.BitBlt(hViewdc, 0, 0);
+	// gameStartButton.TransparentBlt(hViewdc, 120, 640, gameStartButton.GetWidth(), gameStartButton.GetHeight() / 3, 0, gsbAnim, gameStartButton.GetWidth(), gameStartButton.GetHeight() / 3, RGB(255, 0, 255));
+	gameStartButton.AlphaBlend(hViewdc, point, 255U);
 
     // Double buffering
     BitBlt(hdc, 0, 0, winWidth, winHeight, hViewdc, 0, 0, SRCCOPY);

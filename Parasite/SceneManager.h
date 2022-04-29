@@ -9,8 +9,9 @@ private:
 	int winWidth;
 	int winHeight;
 
-	// 배경 타일
-	CImage map;
+	// Image resource
+	CImage background;
+	CImage gameStartButton;
 
 protected:
 

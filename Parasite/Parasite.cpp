@@ -142,6 +142,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         }
         break;
     case WM_PAINT:
+        if (gSceneManger == nullptr) break;
+        gSceneManger->Render(hWnd);
         break;
     case WM_DESTROY:
         PostQuitMessage(0);
